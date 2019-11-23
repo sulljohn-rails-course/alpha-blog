@@ -39,7 +39,6 @@
     </ul>
 
 
-
     <form class="form-inline my-2 my-lg-0">
       <% if logged_in? %>
         <ul class="navbar-nav mr-auto">
@@ -54,12 +53,12 @@
           </li>
         </ul>
         <li><%= link_to "Log out", logout_path, method: :delete %></li>
-    <% else %>
+      <% else %>
         <li><%= link_to "Log in", login_path %></li>
         <li><%= link_to "Sign up", signup_path %></li>
       <% end %>
 
 
-        </form>
+    </form>
   </div>
 </nav>
