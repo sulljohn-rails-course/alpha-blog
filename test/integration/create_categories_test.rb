@@ -1,30 +1,30 @@
 require 'test_helper'
 
 class CreateCategoriesTest < ActionDispatch::IntegrationTest
-  test  'get new category from and create category' do
+
+  def setup
+    @user = User.create(username: "John", email: "john@example.com", password: "password", admin: true)
+  end
+
+  test "get new category form and create category" do
+    sign_in_as(@user, "password")
     get new_category_path
     assert_template 'categories/new'
     assert_difference 'Category.count', 1 do
-      post categories_path, params: { category: { name: "sports" } }
-      follow_redirect! # This is necessary or it falls apart
-      # Source: https://stackoverflow.com/questions/44521001/ror-testing-errors-expecting-categories-new-but-rendering-with
+      post categories_path, params: { category: {name: "sports"}}
+      follow_redirect!
     end
-
-    # Something wrong with these:
     assert_template 'categories/index'
     assert_match 'sports', response.body
   end
 
   test "invalid category submission results in failure" do
+    sign_in_as(@user, "password")
     get new_category_path
     assert_template 'categories/new'
     assert_no_difference 'Category.count' do
-      post categories_path, params: { category: { name: " " } }
-      # follow_redirect! # This is necessary or it falls apart
-      # Source: https://stackoverflow.com/questions/44521001/ror-testing-errors-expecting-categories-new-but-rendering-with
+      post categories_path, params: { category: {name: " "}}
     end
-
-    # Something wrong with these
     assert_template 'categories/new'
     assert_select 'div.card-header'
     assert_select 'div.card-text'
