@@ -19,6 +19,9 @@
   <div class="card-body">
     <div class="card-text">
       <%= simple_format(@article.description) %>
+      <% if @article.categories.any? %>
+        <p>Categories: <%= render @article.categories %></p>
+      <% end %>
     </div>
   </div>
   <div class="card-footer">
