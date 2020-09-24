@@ -2,7 +2,7 @@
 
 ## Link
 
-[Link](https://alpha-blog-sulljohn.herokuapp.com/)
+[Link](https://sulljohn-alpha-blog.herokuapp.com/)
 
 ## Info
 
